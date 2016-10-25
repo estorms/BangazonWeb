@@ -46,6 +46,8 @@ namespace BangazonWeb.Controllers
         }
 
         [HttpGet]
+
+        //would not need to an explicit HttpGet decorator if we weren't method overloading below
         public IActionResult Create()
         {
             ViewData["ProductTypeId"] = context.ProductType
@@ -68,13 +70,14 @@ namespace BangazonWeb.Controllers
         }
 
         [HttpPost]
+        //post decorator always recommended by not strictly requisite per the logic
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product product)
         {
             if (ModelState.IsValid)
             {
                 context.Add(product);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(); 
                 return RedirectToAction("Index");
             }
             return View(product);

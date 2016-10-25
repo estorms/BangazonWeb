@@ -28,7 +28,7 @@ namespace BangazonWeb.Controllers
             {
                 context.Add(customer);
                 await context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Products");
             }
             return View();
         }
