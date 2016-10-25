@@ -22,6 +22,7 @@ namespace BangazonWeb.Controllers
         }
 
         [HttpPost]
+        //Line 24 indicates that the following code contains the logic for explicitly responding to a post SENT from the front-end 
         public IActionResult Activate([FromBody]int CustomerId)
         {
           var customer = context.Customer.SingleOrDefault(c => c.CustomerId == CustomerId);
@@ -31,7 +32,10 @@ namespace BangazonWeb.Controllers
             return NotFound();
           }
 
-          ActiveCustomer.Instance.Customer = customer;
+          //Line 36 sets the property of customer on the current instance of the ActiveCustomter class. So the customer in the predicate of this statement equals the active customer selected, as identified by cycling through the customer ID passed in above
+          
+          //INSTANCE RETURNS AN **OBJECT** IN MEMORY, RATHER THAN A PROPERTY ON THE CLASS OF ACTIVE CUSTOMER
+          ActiveCustomer.instance.Customer = customer;
 
 
 
